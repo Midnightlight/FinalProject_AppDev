@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>APPDEV 2021</title>
+</head>
+<script>
+    function getdata() {
+        fetch('http://www.cc.puv.fi/~e1800927/record.txt')
+            .then(r => r.text())
+            .then(data => dispdata(data))
+    };
+
+    function dispdata(d) {
+        var ctt = document.getElementById("data");
+        var can = document.getElementById("chart");
+        var ctx = can.getContext('2d');
+        ctx.lineWidth = 20;				// set the line width of drawing
+        var lines = d.split("\n");		// split whole text into lines
+        var i = 0;
+        while (typeof lines[0] !== "undefined") {
+            var line = lines.shift();		// take one line from lines
+            var split = line.split(' ');	// split a line by ' '
+            ctt.innerHTML += line + "<br/>";	// write a line in <p>
+            ctx.strokeStyle = 'green';	// color name or code
+            ctx.beginPath();
+            ctx.moveTo(i * 50 + 10, 400 - 10);
+            ctx.lineTo(i * 50 + 10, 400 - 10 - parseInt(split[2]) * 3);	// draw min value
+            ctx.stroke();
+            ctx.strokeStyle = 'pink';
+            ctx.beginPath();
+            ctx.moveTo(i * 50 + 30, 400 - 10);
+            ctx.lineTo(i * 50 + 30, 400 - 10 - parseInt(split[3]) * 3);	// draw max value
+            ctx.stroke();
+            i++;
+        }
+    }
+</script>
+
+<body onload=getdata()>
+    <p id="data"></p>
+    <canvas id="chart" height=400 width=1000 style="border:solid 3px red"></canvas>
+</body>
+
+</html>
