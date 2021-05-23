@@ -10,7 +10,7 @@ This project is a Min/ Max project for Application Development course 2020-2021;
 - appdev.h : the header file
 - main.c : contains the main() function
 - sendData.c : contains the send_data() function to send data to server
-- testCurl.php: the code of server
+- testCurl.php: the server's code
 ```
 
 
